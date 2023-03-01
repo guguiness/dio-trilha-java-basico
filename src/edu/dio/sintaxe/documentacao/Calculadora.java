@@ -1,4 +1,4 @@
-package edu.dio.documentacao;
+package edu.dio.sintaxe.documentacao;
 
 /**
 * <h1>Calculadora</h1>

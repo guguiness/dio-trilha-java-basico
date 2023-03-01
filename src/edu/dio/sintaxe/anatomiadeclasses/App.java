@@ -1,4 +1,5 @@
-package edu.dio.anatomiadeclasses;
+package edu.dio.sintaxe.anatomiadeclasses;
+
 import java.util.Scanner;
 
 public class App {

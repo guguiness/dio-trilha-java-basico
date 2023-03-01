@@ -1,4 +1,5 @@
-package edu.dio.metodos;
+package edu.dio.sintaxe.metodos;
+
 
 public class SmartTV {
     boolean ligada = false;

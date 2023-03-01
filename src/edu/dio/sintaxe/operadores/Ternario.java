@@ -1,4 +1,4 @@
-package edu.dio.operadores;
+package edu.dio.sintaxe.operadores;
 
 public class Ternario {
     public static void main(String[] args) {

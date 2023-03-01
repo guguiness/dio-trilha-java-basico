@@ -1,4 +1,4 @@
-package edu.dio.anatomiadeclasses;
+package edu.dio.sintaxe.anatomiadeclasses;
 
 public class Nome {
 

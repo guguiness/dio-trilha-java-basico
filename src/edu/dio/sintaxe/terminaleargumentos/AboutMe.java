@@ -1,4 +1,4 @@
-package edu.dio.terminaleargumentos;
+package edu.dio.sintaxe.terminaleargumentos;
 
 import java.util.Locale;
 import java.util.Scanner;
