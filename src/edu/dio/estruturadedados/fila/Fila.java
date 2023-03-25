@@ -1,21 +1,21 @@
 package edu.dio.estruturadedados.fila;
 
-public class Fila {
-	private No refNoEntradaFila;
+public class Fila<T> {
+	private No<T> refNoEntradaFila;
 	
 	public Fila() {
 		this.refNoEntradaFila = null;
 	}
 	
-	public void enqueue(Object obj) {
-		No novoNo = new No(obj);
+	public void enqueue(T obj) {
+		No<T> novoNo = new No<>(obj);
 		novoNo.setRefNo(getRefNoEntradaFila());
 		setRefNoEntradaFila(novoNo);
 	}
 	
-	public Object first() {
+	public T first() {
 		if(!this.isEmpty()) {
-			No primeiroNo = this.refNoEntradaFila;
+			No<T> primeiroNo = this.refNoEntradaFila;
 			while(true) {
 				if(primeiroNo.getRefNo() != null) {
 					primeiroNo = primeiroNo.getRefNo();
@@ -28,10 +28,10 @@ public class Fila {
 		return null;
 	}
 	
-	public Object dequeue() {
+	public T dequeue() {
 		if(!this.isEmpty()) {
-			No primeiroNo = this.refNoEntradaFila;
-			No noAuxiliar = this.refNoEntradaFila;
+			No<T> primeiroNo = this.refNoEntradaFila;
+			No<T> noAuxiliar = this.refNoEntradaFila;
 			while(true) {
 				if(primeiroNo.getRefNo() != null) {
 					noAuxiliar = primeiroNo;
@@ -50,18 +50,18 @@ public class Fila {
 		return getRefNoEntradaFila() == null;
 	}
 	
-	public No getRefNoEntradaFila() {
+	public No<T> getRefNoEntradaFila() {
 		return refNoEntradaFila;
 	}
 	
-	public void setRefNoEntradaFila(No refNoEntradaFila) {
+	public void setRefNoEntradaFila(No<T> refNoEntradaFila) {
 		this.refNoEntradaFila = refNoEntradaFila;
 	}
 	
 	@Override
 	public String toString() {
 		String stringRetorno = "";
-		No noAuxiliar = this.refNoEntradaFila;
+		No<T> noAuxiliar = this.refNoEntradaFila;
 		
 		if(refNoEntradaFila != null) {
 			while(true) {
