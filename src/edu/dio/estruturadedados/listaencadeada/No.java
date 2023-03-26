@@ -48,19 +48,3 @@ public class No<T> {
 		return str;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
