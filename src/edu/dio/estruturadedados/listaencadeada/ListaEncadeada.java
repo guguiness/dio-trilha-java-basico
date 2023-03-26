@@ -83,11 +83,11 @@ public class ListaEncadeada<T> {
 		return this.getReferenciaEntrada() == null;
 	}
 
-	public No<T> getReferenciaEntrada() {
+	private No<T> getReferenciaEntrada() {
 		return referenciaEntrada;
 	}
 
-	public void setReferenciaEntrada(No<T> referenciaEntrada) {
+	private void setReferenciaEntrada(No<T> referenciaEntrada) {
 		this.referenciaEntrada = referenciaEntrada;
 	}
 
