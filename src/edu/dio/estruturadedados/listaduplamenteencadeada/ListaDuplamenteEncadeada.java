@@ -51,7 +51,7 @@ public class ListaDuplamenteEncadeada<T> {
 		this.setTamanhoLista(this.getTamanhoLista() + 1);
 	}
 	
-	private T remove(int index) {
+	public T remove(int index) {
 		if(this.getTamanhoLista() != 0) {
 			NoDuplo<T> noAuxiliar = this.getNo(index);
 			T elementoRemovido = noAuxiliar.getConteudo();
