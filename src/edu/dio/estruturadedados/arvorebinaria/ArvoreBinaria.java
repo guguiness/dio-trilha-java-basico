@@ -23,6 +23,46 @@ public class ArvoreBinaria<T extends Comparable<T>> {
 		
 		return atual;
 	}
+	
+	public void exibirInOrdem() {
+		System.out.println("\nExibindo InOrdem");
+		exibirInOrdem(this.getRaiz());
+	}
+	
+	private void exibirInOrdem(BinNo<T> atual) {
+		if(atual != null) {
+			this.exibirInOrdem(atual.getNoEsq());
+			System.out.println(atual.getConteudo() + " | ");
+			this.exibirInOrdem(atual.getNoDir());
+		}
+	}
+
+	public void exibirPosOrdem() {
+		System.out.println("\nExibindo InOrdem");
+		exibirInOrdem(this.getRaiz());
+	}
+	
+	private void exibirPosOrdem(BinNo<T> atual) {
+		if(atual != null) {
+			this.exibirPosOrdem(atual.getNoEsq());
+			this.exibirPosOrdem(atual.getNoDir());
+			System.out.println(atual.getConteudo() + " | ");
+		}
+	}
+
+	public void exibirPreOrdem() {
+		System.out.println("\nExibindo InOrdem");
+		exibirInOrdem(this.getRaiz());
+	}
+	
+	private void exibirPreOrdem(BinNo<T> atual) {
+		if(atual != null) {
+			System.out.println(atual.getConteudo() + " | ");
+			this.exibirPreOrdem(atual.getNoEsq());
+			this.exibirPreOrdem(atual.getNoDir());
+		}
+	}
+	
 
 	public BinNo<T> getRaiz() {
 		return raiz;
