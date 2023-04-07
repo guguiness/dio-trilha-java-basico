@@ -33,4 +33,9 @@ public class Carro {
 		Carro other = (Carro) obj;
 		return Objects.equals(marca, other.marca);
 	}
+
+	@Override
+	public String toString() {
+		return "Carro [marca=" + marca + "]";
+	}
 }
