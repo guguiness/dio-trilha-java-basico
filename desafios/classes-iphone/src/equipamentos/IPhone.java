@@ -5,6 +5,9 @@ import objetos.Musica;
 public class IPhone implements AparelhoTelefonico, ReprodutorMusical, NavegadorInternet {
     private float versao;
 
+    public IPhone() {
+    }
+
     public IPhone(float versao) {
         this.versao = versao;
     }

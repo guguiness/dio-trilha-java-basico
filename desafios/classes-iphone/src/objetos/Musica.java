@@ -6,6 +6,14 @@ public class Musica {
     public int anoLancamento;
     public int duracao;
 
+    public Musica() {
+    }
+
+    public Musica(String nome, String artista) {
+        this.nome = nome;
+        this.artista = artista;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -36,5 +44,11 @@ public class Musica {
 
     public void setDuracao(int duracao) {
         this.duracao = duracao;
+    }
+
+    @Override
+    public String toString() {
+        return "nome='" + nome + '\'' +
+                ", artista='" + artista + '\'';
     }
 }
