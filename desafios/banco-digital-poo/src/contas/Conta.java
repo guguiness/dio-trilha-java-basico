@@ -1,5 +1,8 @@
 package contas;
 
+import entidades.Banco;
+import entidades.Cliente;
+
 public abstract class Conta implements iConta {
     private static final int AGENCIA_PADRAO = 1;
     private static int SEQUENCIAL = 0;
@@ -7,10 +10,13 @@ public abstract class Conta implements iConta {
     protected int agencia;
     protected int numero;
     protected double saldo;
+    protected Cliente titular;
 
-    public Conta() {
+    public Conta(Cliente titular) {
+        this.titular = titular;
         this.agencia = Conta.AGENCIA_PADRAO;
-        this.numero = Conta.SEQUENCIAL++;
+        this.numero = ++Conta.SEQUENCIAL;
+        Banco.adicionarConta(this);
     }
 
     @Override
@@ -40,9 +46,10 @@ public abstract class Conta implements iConta {
 
     @Override
     public void imprimirExtrato() {
-        System.out.println(this.agencia);
-        System.out.println(this.numero);
-        System.out.println(this.saldo);
+        System.out.println("Titular: " + this.titular.getNome());
+        System.out.println("Agência: " + this.agencia);
+        System.out.println("Número: " + this.numero);
+        System.out.println("Saldo: " + this.saldo);
     }
 
     public int getAgencia() {
@@ -55,5 +62,17 @@ public abstract class Conta implements iConta {
 
     public double getSaldo() {
         return this.saldo;
+    }
+
+    public Cliente getTitular() {
+        return this.titular;
+    }
+
+    @Override
+    public String toString() {
+        return "Conta{" +
+                "numero=" + numero +
+                ", titular=" + titular.getNome() +
+                '}';
     }
 }
