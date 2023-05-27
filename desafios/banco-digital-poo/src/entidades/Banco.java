@@ -26,6 +26,18 @@ public class Banco {
         listaContaPoupanca.add(novaConta);
     }
 
+    public void imprimirListaContas(TipoConta tipoConta) {
+        if(tipoConta.equals(TipoConta.CONTA_CORRENTE)) {
+            for(ContaCorrente cc : listaContaCorrente) {
+                System.out.println("- Conta: " + cc.getNumeroConta() + ", Titular: " + cc.getTitular().getNome());
+            }
+        } else if(tipoConta.equals(TipoConta.CONTA_POUPANCA)) {
+            for(ContaPoupanca cp : listaContaPoupanca) {
+                System.out.println("- Conta: " + cp.getNumeroConta() + ", Titular: " + cp.getTitular().getNome());
+            }
+        }
+    }
+
     public static List<ContaCorrente> getListaContaCorrente() {
         return listaContaCorrente;
     }
