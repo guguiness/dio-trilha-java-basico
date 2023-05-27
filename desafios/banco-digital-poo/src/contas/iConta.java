@@ -5,11 +5,12 @@ import excecoes.SaldoInsuficienteException;
 import excecoes.SaldoPendenteException;
 
 public interface iConta {
-    void depositar(int valor) throws ContaInativaException, NullPointerException;
+    void depositar(double valor) throws ContaInativaException, NullPointerException;
 
-    void sacar(int valor) throws ContaInativaException, SaldoInsuficienteException, NullPointerException;
+    void sacar(double valor) throws ContaInativaException, SaldoInsuficienteException, NullPointerException;
 
-    void transferir(int valor, Conta destino) throws ContaInativaException, SaldoInsuficienteException, NullPointerException;
+    void transferir(double valor, Conta destino) throws ContaInativaException, SaldoInsuficienteException,
+            NullPointerException;
 
     void imprimirExtrato() throws ContaInativaException, NullPointerException;
 

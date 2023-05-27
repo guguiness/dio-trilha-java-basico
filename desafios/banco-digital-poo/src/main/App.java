@@ -6,8 +6,9 @@ import contas.ContaPoupanca;
 import entidades.Banco;
 import entidades.Cliente;
 import entidades.TipoConta;
-
-import java.util.Iterator;
+import excecoes.ContaInativaException;
+import excecoes.SaldoInsuficienteException;
+import excecoes.SaldoPendenteException;
 
 public class App {
     public static void main(String[] args) {
@@ -18,27 +19,47 @@ public class App {
 
         Conta conta1 = new ContaCorrente(juninho);
 
-        System.out.println("Conta do Juninho");
-        System.out.println("Titular: " + conta1.getTitular().getNome());
-        System.out.println("Agência: " + conta1.getAgencia());
-        System.out.println("Número: " + conta1.getNumeroConta());
+        try {
+            conta1.depositar(300.00);
+            conta1.sacar(20.00);
+            conta1.imprimirExtrato();
+        } catch(ContaInativaException e) {
+            System.out.println("Impossível realizar. Conta inativa");
+        } catch(SaldoInsuficienteException e) {
+            System.out.println("Impossível realizar. Saldo insuficiente");
+        }
 
-        System.out.println();
+        System.out.println("\n");
         Conta conta2 = new ContaPoupanca(fabiana);
-        System.out.println("Conta da Fabi");
-        System.out.println("Titular: " + conta2.getTitular().getNome());
-        System.out.println("Agência: " + conta2.getAgencia());
-        System.out.println("Número: " + conta2.getNumeroConta());
+        try {
+            conta2.depositar(500.00);
+            conta2.imprimirExtrato();
+        } catch(ContaInativaException e) {
+            System.out.println("Impossível realizar. Conta inativa");
+        }
 
-        System.out.println();
+        System.out.println("\n");
         Conta conta3 = new ContaCorrente(carlos);
-        System.out.println("Conta do Carlos");
-        System.out.println("Titular: " + conta3.getTitular().getNome());
-        System.out.println("Agência: " + conta3.getAgencia());
-        System.out.println("Número: " + conta3.getNumeroConta());
+        try {
+            conta3.inativarConta();
+            conta3.imprimirExtrato();
+        } catch(ContaInativaException e) {
+            System.out.println("Impossível realizar. Conta inativa");
+        } catch(SaldoPendenteException e) {
+            System.out.println("Impossível realizar. Ainda há saldo na conta. Retire-o antes de inativar");
+        }
 
-        System.out.println();
+        try {
+            conta1.transferir(20d, conta3);
+        } catch(ContaInativaException e) {
+            Conta contaInativa;
+            contaInativa = (conta1.isAtivo()) ? conta3 : conta1;
+            System.out.println("Impossível realizar. Conta " + contaInativa.getNumeroConta() +" inativa");
+        } catch(SaldoInsuficienteException e) {
+            System.out.println("Saldo insuficiente");
+        }
 
+        System.out.println("\n");
         System.out.println("Lista de contas do banco");
         System.out.println("Corrente:");
         banco1.imprimirListaContas(TipoConta.CONTA_CORRENTE);

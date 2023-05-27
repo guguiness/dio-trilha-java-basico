@@ -28,19 +28,21 @@ public abstract class Conta implements iConta {
     }
 
     @Override
-    public void depositar(int valor) throws ContaInativaException, NullPointerException {
+    public void depositar(double valor) throws ContaInativaException, NullPointerException {
         if(this.ativo) {
             this.saldo += valor;
+            System.out.printf("\nOPERAÇÃO: Depósito de %.2f realizado para conta %d\n", valor, this.numero);
             return;
         }
         throw new ContaInativaException();
     }
 
     @Override
-    public void sacar(int valor) throws ContaInativaException, SaldoInsuficienteException, NullPointerException {
+    public void sacar(double valor) throws ContaInativaException, SaldoInsuficienteException, NullPointerException {
         if(this.ativo) {
             if(this.saldo >= valor) {
                 this.saldo -= valor;
+                System.out.printf("\nOPERAÇÃO: Saque de %.2f realizado da conta %d\n", valor, this.numero);
                 return;
             }
             throw new SaldoInsuficienteException();
@@ -49,12 +51,15 @@ public abstract class Conta implements iConta {
     }
 
     @Override
-    public void transferir(int valor, Conta contaDestino) throws ContaInativaException, SaldoInsuficienteException, NullPointerException {
+    public void transferir(double valor, Conta contaDestino) throws ContaInativaException, SaldoInsuficienteException,
+            NullPointerException {
         if(this.ativo) {
             if(contaDestino.isAtivo()) {
                 if(this.saldo >= valor) {
                     this.sacar(valor);
                     contaDestino.depositar(valor);
+                    System.out.printf("\nOPERAÇÃO: Transferência de %.2f realizado da conta %d para a conta %d\n", valor,
+                            this.numero, contaDestino.getNumeroConta());
                     return;
                 }
                 throw new SaldoInsuficienteException();
@@ -65,15 +70,14 @@ public abstract class Conta implements iConta {
     }
 
     @Override
-    public void imprimirExtrato() throws ContaInativaException, NullPointerException {
+    public void imprimirExtrato() throws NullPointerException {
         if(this.ativo) {
             System.out.println("Titular: " + this.titular.getNome());
             System.out.println("Agência: " + this.agencia);
             System.out.println("Número: " + this.numero);
-            System.out.println("Saldo: " + this.saldo);
+            System.out.printf("Saldo: %.2f", this.saldo);
             return;
         }
-        throw new ContaInativaException();
     }
 
     @Override

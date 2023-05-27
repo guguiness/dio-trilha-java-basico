@@ -25,8 +25,10 @@ public class ContaPoupanca extends Conta {
     }
 
     @Override
-    public void imprimirExtrato() throws ContaInativaException, NullPointerException {
-        System.out.println("=== Extrato - Conta Poupança ===");
-        super.imprimirExtrato();
+    public void imprimirExtrato() throws NullPointerException {
+        if(this.ativo) {
+            System.out.println("=== Extrato - Conta Poupança ===");
+            super.imprimirExtrato();
+        }
     }
 }
