@@ -32,7 +32,13 @@ public class App {
         System.out.println();
 
         System.out.println("Lista de contas do banco");
-        for (Conta next : Banco.getContas()) {
+        System.out.println("Corrente:");
+        for (Conta next : Banco.getListaContaCorrente()) {
+            System.out.println("- Conta: " + next.getNumeroConta() + ", Titular: " + next.getTitular().getNome());
+        }
+        System.out.println();
+        System.out.println("Poupança:");
+        for (Conta next : Banco.getListaContaCorrente()) {
             System.out.println("- Conta: " + next.getNumeroConta() + ", Titular: " + next.getTitular().getNome());
         }
     }

@@ -1,25 +1,45 @@
 package entidades;
 
 import contas.Conta;
+import contas.ContaCorrente;
+import contas.ContaPoupanca;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Banco {
     private String nome;
-    private static List<Conta> contas;
+    private static List<ContaCorrente> listaContaCorrente;
+    private static List<ContaPoupanca> listaContaPoupanca;
 
     public Banco(String nome) {
         this.nome = nome;
-        contas = new ArrayList<>();
+        listaContaCorrente = new ArrayList<>();
+        listaContaPoupanca = new ArrayList<>();
     }
 
-    public static void adicionarConta(Conta novaConta) {
-        contas.add(novaConta);
+    public static void adicionarContaCorrente(ContaCorrente novaConta) {
+        listaContaCorrente.add(novaConta);
     }
 
-    public static List<Conta> getContas() {
-        return contas;
+    public static void adicionarContaPoupanca(ContaPoupanca novaConta) {
+        listaContaPoupanca.add(novaConta);
+    }
+
+    public static List<ContaCorrente> getListaContaCorrente() {
+        return listaContaCorrente;
+    }
+
+    public static void setListaContaCorrente(List<ContaCorrente> listaContaCorrente) {
+        Banco.listaContaCorrente = listaContaCorrente;
+    }
+
+    public static List<ContaPoupanca> getListaContaPoupanca() {
+        return listaContaPoupanca;
+    }
+
+    public static void setListaContaPoupanca(List<ContaPoupanca> listaContaPoupanca) {
+        Banco.listaContaPoupanca = listaContaPoupanca;
     }
 
     public String getNome() {

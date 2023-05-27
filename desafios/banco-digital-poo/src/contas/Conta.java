@@ -1,55 +1,91 @@
 package contas;
 
-import entidades.Banco;
 import entidades.Cliente;
+import excecoes.ContaInativaException;
+import excecoes.SaldoInsuficienteException;
+import excecoes.SaldoPendenteException;
 
 public abstract class Conta implements iConta {
-    private static final int AGENCIA_PADRAO = 1;
-    private static int SEQUENCIAL = 0;
+    protected static final int AGENCIA_PADRAO = 1;
+    protected static int SEQUENCIAL = 0;
 
     protected int agencia;
     protected int numero;
     protected double saldo;
+    protected boolean ativo;
     protected Cliente titular;
 
     public Conta(Cliente titular) {
         this.titular = titular;
-        this.agencia = Conta.AGENCIA_PADRAO;
-        this.numero = ++Conta.SEQUENCIAL;
-        Banco.adicionarConta(this);
     }
 
-    @Override
-    public boolean depositar(int valor) {
-        this.saldo += valor;
-        return true;
-    }
+    protected abstract void ativarContaNova(Conta contaNova);
 
-    @Override
-    public boolean sacar(int valor) {
-        if(this.saldo >= valor) {
-            this.saldo -= valor;
-            return true;
+    protected void ativarContaExistente(Conta contaExistente) throws NullPointerException {
+        if(!contaExistente.ativo) {
+            contaExistente.setAtivo(true);
         }
-        return false;
     }
 
     @Override
-    public boolean transferir(int valor, Conta contaDestino) {
-        if(this.saldo >= valor && contaDestino.numero <= Conta.SEQUENCIAL) {
-            this.sacar(valor);
-            contaDestino.depositar(valor);
-            return true;
+    public void depositar(int valor) throws ContaInativaException, NullPointerException {
+        if(this.ativo) {
+            this.saldo += valor;
+            return;
         }
-        return false;
+        throw new ContaInativaException();
     }
 
     @Override
-    public void imprimirExtrato() {
-        System.out.println("Titular: " + this.titular.getNome());
-        System.out.println("Agência: " + this.agencia);
-        System.out.println("Número: " + this.numero);
-        System.out.println("Saldo: " + this.saldo);
+    public void sacar(int valor) throws ContaInativaException, SaldoInsuficienteException, NullPointerException {
+        if(this.ativo) {
+            if(this.saldo >= valor) {
+                this.saldo -= valor;
+                return;
+            }
+            throw new SaldoInsuficienteException();
+        }
+        throw new ContaInativaException();
+    }
+
+    @Override
+    public void transferir(int valor, Conta contaDestino) throws ContaInativaException, SaldoInsuficienteException, NullPointerException {
+        if(this.ativo) {
+            if(contaDestino.isAtivo()) {
+                if(this.saldo >= valor) {
+                    this.sacar(valor);
+                    contaDestino.depositar(valor);
+                    return;
+                }
+                throw new SaldoInsuficienteException();
+            }
+            throw new ContaInativaException("Conta de destino inativa");
+        }
+        throw new ContaInativaException("Conta de origem inativa");
+    }
+
+    @Override
+    public void imprimirExtrato() throws ContaInativaException, NullPointerException {
+        if(this.ativo) {
+            System.out.println("Titular: " + this.titular.getNome());
+            System.out.println("Agência: " + this.agencia);
+            System.out.println("Número: " + this.numero);
+            System.out.println("Saldo: " + this.saldo);
+            return;
+        }
+        throw new ContaInativaException();
+    }
+
+    @Override
+    public void inativarConta() throws ContaInativaException, NullPointerException, SaldoPendenteException {
+        if(this.ativo) {
+            if(this.saldo == 0) {
+                this.ativo = false;
+                return;
+            }
+            throw new SaldoPendenteException("Impossível inativar. A conta ainda possui saldo");
+        }
+        throw new ContaInativaException();
     }
 
     public int getAgencia() {
@@ -66,6 +102,14 @@ public abstract class Conta implements iConta {
 
     public Cliente getTitular() {
         return this.titular;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 
     @Override

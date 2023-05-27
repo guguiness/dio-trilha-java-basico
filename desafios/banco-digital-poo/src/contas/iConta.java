@@ -1,11 +1,17 @@
 package contas;
 
+import excecoes.ContaInativaException;
+import excecoes.SaldoInsuficienteException;
+import excecoes.SaldoPendenteException;
+
 public interface iConta {
-    boolean depositar(int valor);
+    void depositar(int valor) throws ContaInativaException, NullPointerException;
 
-    boolean sacar(int valor);
+    void sacar(int valor) throws ContaInativaException, SaldoInsuficienteException, NullPointerException;
 
-    boolean transferir(int valor, Conta destino);
+    void transferir(int valor, Conta destino) throws ContaInativaException, SaldoInsuficienteException, NullPointerException;
 
-    void imprimirExtrato();
+    void imprimirExtrato() throws ContaInativaException, NullPointerException;
+
+    void inativarConta() throws ContaInativaException, NullPointerException, UnsupportedOperationException, SaldoPendenteException;
 }
