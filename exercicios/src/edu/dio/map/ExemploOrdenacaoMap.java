@@ -7,6 +7,8 @@ Autor = Duhigg, Charles - Livro = nome: O Poder do Hábito, paginas: 408
 Autor = Harari, Yuval Noah  - Livro = 21 Lições Para o Século 21, páginas: 432
 */
 
+import com.sun.source.tree.Tree;
+
 import java.util.*;
 
 public class ExemploOrdenacaoMap {
@@ -42,6 +44,13 @@ public class ExemploOrdenacaoMap {
         meusLivros3.addAll(meusLivros2.entrySet());
         for(Map.Entry<String, Livro> entry : meusLivros3) {
             System.out.println(entry.getKey() + " - " + entry.getValue().getNome());
+        }
+
+        System.out.println("--\tOrdem número de página\t--");
+        Set<Map.Entry<String, Livro>> meusLivros4 = new TreeSet<>(new ComparatorPaginas());
+        meusLivros4.addAll(meusLivros2.entrySet());
+        for(Map.Entry<String, Livro> entry : meusLivros4) {
+            System.out.println(entry.getKey() + " - " + entry.getValue().getNome() + " - " + entry.getValue().getPaginas());
         }
     }
 }
@@ -97,5 +106,12 @@ class ComparatorNome implements Comparator<Map.Entry<String, Livro>> {
     @Override
     public int compare(Map.Entry<String, Livro> l1, Map.Entry<String, Livro> l2) {
         return l1.getValue().getNome().compareToIgnoreCase(l2.getValue().getNome());
+    }
+}
+
+class ComparatorPaginas implements Comparator<Map.Entry<String, Livro>> {
+    @Override
+    public int compare(Map.Entry<String, Livro> l1, Map.Entry<String, Livro> l2) {
+        return Integer.compare(l1.getValue().getPaginas(), l2.getValue().getPaginas());
     }
 }
