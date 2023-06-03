@@ -1,3 +1,5 @@
+package exemplos;
+
 import java.util.*;
 
 public class ExemploMap {

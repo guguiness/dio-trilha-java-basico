@@ -1,0 +1,1 @@
+INDEX VERSION 1.131+C:\Users\gustavo\Documents\Projetos\Java\DIO\dio-trilha-java-basico\exercicios\.metadata\.plugins\org.eclipse.jdt.core

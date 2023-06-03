@@ -1,13 +1,11 @@
-/*Dadas as seguintes informações sobre meus livros favoritos e seus autores,
+package exemplos;/*Dadas as seguintes informações sobre meus livros favoritos e seus autores,
 crie um dicionário e ordene este dicionário:
-exibindo (Nome Autor - Nome Livro);
+exibindo (Nome Autor - Nome exemplos.Livro);
 
-Autor = Hawking, Stephen  - Livro = nome: Uma Breve História do Tempo. páginas: 256
-Autor = Duhigg, Charles - Livro = nome: O Poder do Hábito, paginas: 408
-Autor = Harari, Yuval Noah  - Livro = 21 Lições Para o Século 21, páginas: 432
+Autor = Hawking, Stephen  - exemplos.Livro = nome: Uma Breve História do Tempo. páginas: 256
+Autor = Duhigg, Charles - exemplos.Livro = nome: O Poder do Hábito, paginas: 408
+Autor = Harari, Yuval Noah  - exemplos.Livro = 21 Lições Para o Século 21, páginas: 432
 */
-
-import com.sun.source.tree.Tree;
 
 import java.util.*;
 
