@@ -7,16 +7,17 @@ import java.util.Set;
 public class Bootcamp {
     private String nome;
     private String descricao;
-    private LocalDate dataInicio;
-    private LocalDate dataFim;
-    private Set<Dev> devsInscritos;
-    private Set<Atividade> atividades;
+    private LocalDate dataInicio = LocalDate.now();
+    private LocalDate dataFim = this.dataInicio.plusDays(45);
+    private Set<Dev> devsInscritos = new HashSet<>();
+    private Set<Atividade> atividades = new LinkedHashSet<>();
 
     public Bootcamp() {
-        this.dataInicio = LocalDate.now();
-        this.dataFim = this.dataInicio.plusDays(45);
-        this.devsInscritos = new HashSet<>();
-        this.atividades = new LinkedHashSet<>();
+    }
+
+    public Bootcamp(String nome, String descricao) {
+        this.nome = nome;
+        this.descricao = descricao;
     }
 
     public String getNome() {

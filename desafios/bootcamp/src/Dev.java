@@ -5,12 +5,14 @@ import java.util.Set;
 
 public class Dev {
     private String nome;
-    private Set<Atividade> atividadesInscritas;
-    private Set<Atividade> atividadesConcluidas;
+    private Set<Atividade> atividadesInscritas = new LinkedHashSet<>();
+    private Set<Atividade> atividadesConcluidas = new LinkedHashSet<>();
 
     public Dev() {
-        this.atividadesInscritas = new LinkedHashSet<>();
-        this.atividadesConcluidas = new LinkedHashSet<>();
+    }
+
+    public Dev(String nome) {
+        this.nome = nome;
     }
 
     public void inscreverBootcamp(Bootcamp bootcamp) {
@@ -69,5 +71,12 @@ public class Dev {
     @Override
     public int hashCode() {
         return Objects.hash(nome, atividadesInscritas, atividadesConcluidas);
+    }
+
+    @Override
+    public String toString() {
+        return "Dev{" +
+                "nome='" + nome + '\'' +
+                '}';
     }
 }
